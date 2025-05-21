@@ -9,7 +9,7 @@ function App() {
   return (
     <>
     <MainLayout>
-      <MyButton />
+      <Header />
     </MainLayout>
     </>
   )
