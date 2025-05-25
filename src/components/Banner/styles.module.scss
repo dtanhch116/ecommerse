@@ -1,0 +1,31 @@
+@use '@styles/mixin.scss' as *;
+@use '@styles/variable.scss' as *;
+
+.container {
+    background-image: url(../../assets/images/banner/banner-ecommerse.jpeg);
+    width: 100%;
+    min-height: 750px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    @include flex_box_custom(center, center, 0px);
+}
+
+.content {
+    @include flex_box_custom(center, center, 10px);
+
+    flex-direction: column;
+}
+
+.title {
+    font-size: 42px;
+    font-weight: 400;
+    margin: 15px 0;
+    color: $four_color;
+}
+
+.des {
+    color: $thr_color;
+    font-weight: 400;
+    margin-bottom: 25px;
+}

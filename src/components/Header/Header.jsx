@@ -8,10 +8,15 @@ import cart from '@icons/svgs/cartIcon.svg';
 
 function Header() {
 
-    const { containerBoxIcon, containerMenu, containerHeader, containerBox } = styles;
+    const { containerBoxIcon, 
+        containerMenu, 
+        containerHeader, 
+        containerBox, 
+            container } = styles;
 
     return (
-        <div className={containerHeader}>
+        <div className={container}>
+            <div className={containerHeader}>
             <div className={containerBox}>
                 <div className={containerBoxIcon}>
                     {dataBoxIcon.slice(0, 3).map((item, index) => {
@@ -24,7 +29,9 @@ function Header() {
                     })}
                 </div>
             </div>
-            <div>logo</div>
+            <div>
+                <img width='26px' src="" alt="" />
+            </div>
             <div className={containerBox}>
                 <div className={containerMenu}>
                     {dataMenu.slice(3, dataMenu.length).map((item, index) => {
@@ -37,6 +44,7 @@ function Header() {
                     <img width='26px' src={cart} alt="" />
                 </div>
             </div>
+        </div>
         </div>
     );
 }
