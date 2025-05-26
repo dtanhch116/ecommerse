@@ -1,9 +1,15 @@
 @use '@styles/mixin.scss' as *;
+@use '@styles/variable.scss' as *;
 
 .btn {
-    @include btn(30px, 30px, 0px, #fff, #000)
-}
+    @include btn(176px, 42px, 3px, $primary_color, #fff);
 
-.btn2 {
-    @include btn(30px, 30px, 50%, #fff, #000)
+    cursor: pointer;
+
+    &:hover {
+        background-color: transparent;
+        color: $primary_color;
+        border: 1px solid $primary_color;
+        transition: background-color 300ms;
+    }
 }

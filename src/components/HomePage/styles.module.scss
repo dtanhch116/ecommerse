@@ -1,0 +1,6 @@
+@use '@styles/mixin.scss' as *;
+
+.container {
+    position: relative;
+    z-index: -1;
+}

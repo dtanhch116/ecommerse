@@ -1,0 +1,35 @@
+@use '@styles/variable.scss' as *;
+@use '@styles/mixin.scss' as *;
+
+.container {
+    height: 144px;
+    background-color: $primary_color;
+    margin-top: -75px;
+    padding: 20px 50px;
+
+    @include flex_box_custom(space-between, center, 0px)
+}
+
+.containerCart {
+    @include flex_box_custom(center, center, 15px);
+
+    width: 280px;
+    height: 104px;
+}
+
+.containerContent {
+    @include flex_box_custom(center, flex-start, 11px);
+
+    flex-direction: column;
+    color: $white_color;
+    font-weight: 300;
+
+    .title {
+        font-size: 17px;
+    }
+
+    .des {
+        font-size: 16px;
+        color: #FFFFFFC7;
+    }
+}
