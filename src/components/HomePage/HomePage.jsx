@@ -4,25 +4,38 @@ import styles from "./styles.module.scss";
 import AdvanceHeading from "@components/AdvanceHeading/AdvanceHeading";
 import Info from "@components/Info/Info";
 import HeadingListProduct from "@components/HeadingListProduct/HeadingListProducts";
+import { useEffect, useState } from "react";
+import { getProducts } from "@/apis/productService";
+import PopularProduct from "@components/PopularProduct/PopularProduct";
+import SaleHomePage from "@components/SaleHomePage/SaleHomePage";
 
 function HomePage() {
     const { container } = styles;
-    return ( 
-        <div>
-            <div className={container}> 
-                <Header />
-                <Banner/>
-                <Info/>
-                <AdvanceHeading/>
-                <HeadingListProduct/>
-                <div style={{
-                    height: '200px',
-                }}>
 
-                </div>
+    const [listProduct, setListProduct] = useState([]);
+
+    useEffect(() => {
+        getProducts().then((res) => {
+            setListProduct(res.contents);
+        });
+    }, []);    
+
+    return (
+        <>
+            <Header />
+            <Banner />
+            <Info />
+            <AdvanceHeading />
+            <HeadingListProduct data={listProduct.slice(0,2)}/>
+            <PopularProduct data={listProduct.slice(2, 10)}/>
+            <SaleHomePage />
+            <div style={{
+                height: '200px',
+            }}>
+
             </div>
-        </div>
-     );
+        </>
+    );
 }
 
 export default HomePage;
