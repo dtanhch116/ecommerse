@@ -2,12 +2,11 @@ import { useEffect, useRef, useState } from 'react';
 
 
 const useTranslateX = () => {
-    const [ translateX, setTranslateX ] = useState(80);
+    const [ translateX, setTranslateX ] = useState(50);
     const [ scrollPosition, setScrollPosition ] = useState(0);
-
     const [scrollDriction, setScrollDriction] = useState(null);
-
     const previousScrollPosition = useRef(0);
+
 
     const scrollChecking = () => {        
         const currentScrollposition = window.scrollY;
@@ -26,15 +25,16 @@ const useTranslateX = () => {
         if (scrollDriction === 'down' && scrollPosition >= 2000){
             setTranslateX(translateX <= 0 ? 0 : translateX - 1);
         } else if (scrollDriction === 'up') {
-            setTranslateX(translateX >= 80 ? 80 : translateX + 1);
+            setTranslateX(translateX >= 50 ? 50 : translateX + 1);
         }
     }    
 
     useEffect(() => {
         window.addEventListener('scroll', scrollChecking);
-
+        
         return () => window.removeEventListener('scroll', scrollChecking);
     }, []);
+    
 
     useEffect(() => {
         handleTranlateX();
