@@ -2,11 +2,15 @@ import HomePage from '@components/HomePage/HomePage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import routers from '@/routers/routers.js';
 import { Suspense } from 'react';
+import { SideBarProvider } from '@/contexts/SideBarProvider';
+import SideBar from '@components/SideBar/SideBar';
 
 function App() {
 
   return (
-    <BrowserRouter>
+    <SideBarProvider>
+      <SideBar />
+      <BrowserRouter>
       <Suspense fallback={<div>loading...</div>}>
         <Routes>
           {
@@ -19,6 +23,7 @@ function App() {
         </Routes>
       </Suspense>
     </BrowserRouter>
+    </SideBarProvider>
   )
 }
 

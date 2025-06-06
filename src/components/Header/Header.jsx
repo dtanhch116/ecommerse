@@ -6,8 +6,9 @@ import reload from '@icons/svgs/reloadIcon.svg';
 import heart from '@icons/svgs/heartIcon.svg';
 import cart from '@icons/svgs/cartIcon.svg';
 import useScrollHanding from "@/hooks/useScrollHanding";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import classNames from "classnames";
+import { SideBarContext } from "@/contexts/SideBarProvider";
 
 function Header() {
 
@@ -25,6 +26,8 @@ function Header() {
 
     }, [scrollPosition])
 
+    const {isOpen, setIsOpen} = useContext(SideBarContext);    
+
     return (
         <div className={classNames(container, topHeader,{
             [fixedHeader]: fixedPosition
@@ -38,7 +41,7 @@ function Header() {
                     </div>
                     <div className={containerMenu}>
                         {dataMenu.slice(0, 3).map((item, index) => {
-                            return <Menu content={item.content} href={item.href} key={index} />
+                            return <Menu content={item.content} href={item.href} key={index}/>
                         })}
                     </div>
                 </div>
@@ -48,7 +51,7 @@ function Header() {
                 <div className={containerBox}>
                     <div className={containerMenu}>
                         {dataMenu.slice(3, dataMenu.length).map((item, index) => {
-                            return <Menu content={item.content} href={item.href} key={index} />
+                            return <Menu content={item.content} href={item.href} key={index} setIsOpen={setIsOpen}/>
                         })}
                     </div>
                     <div className={containerBoxIcon}>
