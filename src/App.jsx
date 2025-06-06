@@ -1,16 +1,24 @@
-import { useState } from 'react';
-import MainLayout from '@components/Layout/Layout';
-import Header from '@components/Header/Header';
-import Banner from '@components/Banner/Banner';
 import HomePage from '@components/HomePage/HomePage';
-import Info from '@components/Info/Info';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import routers from '@/routers/routers.js';
+import { Suspense } from 'react';
 
 function App() {
 
   return (
-    <>
-    <HomePage/>
-    </>
+    <BrowserRouter>
+      <Suspense fallback={<div>loading...</div>}>
+        <Routes>
+          {
+            routers.map((item, index) => {
+              return (
+                <Route path={item.path} element={<item.component />} key={index} />
+              );
+            })
+          }
+        </Routes>
+      </Suspense>
+    </BrowserRouter>
   )
 }
 

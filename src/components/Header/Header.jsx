@@ -5,46 +5,59 @@ import styles from './styles.module.scss';
 import reload from '@icons/svgs/reloadIcon.svg';
 import heart from '@icons/svgs/heartIcon.svg';
 import cart from '@icons/svgs/cartIcon.svg';
+import useScrollHanding from "@/hooks/useScrollHanding";
+import { useEffect, useState } from "react";
+import classNames from "classnames";
 
 function Header() {
 
-    const { containerBoxIcon, 
-        containerMenu, 
-        containerHeader, 
-        containerBox, 
-            container } = styles;
+    const { containerBoxIcon,
+        containerMenu,
+        containerHeader,
+        containerBox,
+        container, fixedHeader, topHeader } = styles;
+
+    const { scrollPosition } = useScrollHanding();
+    const [ fixedPosition, setFixedPosition ] = useState(false);
+    
+    useEffect(() => {
+        setFixedPosition(scrollPosition > 70);
+
+    }, [scrollPosition])
 
     return (
-        <div className={container}>
+        <div className={classNames(container, topHeader,{
+            [fixedHeader]: fixedPosition
+        })}>
             <div className={containerHeader}>
-            <div className={containerBox}>
-                <div className={containerBoxIcon}>
-                    {dataBoxIcon.slice(0, 3).map((item, index) => {
-                        return <BoxIcon type={item.type} href={item.href} key={index} />
-                    })}
+                <div className={containerBox}>
+                    <div className={containerBoxIcon}>
+                        {dataBoxIcon.slice(0, 3).map((item, index) => {
+                            return <BoxIcon type={item.type} href={item.href} key={index} />
+                        })}
+                    </div>
+                    <div className={containerMenu}>
+                        {dataMenu.slice(0, 3).map((item, index) => {
+                            return <Menu content={item.content} href={item.href} key={index} />
+                        })}
+                    </div>
                 </div>
-                <div className={containerMenu}>
-                    {dataMenu.slice(0, 3).map((item, index) => {
-                        return <Menu content={item.content} href={item.href} key={index}/>
-                    })}
+                <div>
+                    <img width='26px' src="" alt="" />
+                </div>
+                <div className={containerBox}>
+                    <div className={containerMenu}>
+                        {dataMenu.slice(3, dataMenu.length).map((item, index) => {
+                            return <Menu content={item.content} href={item.href} key={index} />
+                        })}
+                    </div>
+                    <div className={containerBoxIcon}>
+                        <img width='26px' src={reload} alt="" />
+                        <img width='26px' src={heart} alt="" />
+                        <img width='26px' src={cart} alt="" />
+                    </div>
                 </div>
             </div>
-            <div>
-                <img width='26px' src="" alt="" />
-            </div>
-            <div className={containerBox}>
-                <div className={containerMenu}>
-                    {dataMenu.slice(3, dataMenu.length).map((item, index) => {
-                        return <Menu content={item.content} href={item.href} key={index}/>
-                    })}
-                </div>
-                <div className={containerBoxIcon}>
-                    <img width='26px' src={reload} alt="" />
-                    <img width='26px' src={heart} alt="" />
-                    <img width='26px' src={cart} alt="" />
-                </div>
-            </div>
-        </div>
         </div>
     );
 }
