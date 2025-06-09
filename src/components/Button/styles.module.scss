@@ -2,7 +2,7 @@
 @use '@styles/variable.scss' as *;
 
 .btn {
-    @include btn(176px, 42px, 3px, $primary_color, #fff);
+    @include btn(100%, 42px, 3px, $primary_color, #fff);
 
     font-size: 14px;
     font-weight: 300;

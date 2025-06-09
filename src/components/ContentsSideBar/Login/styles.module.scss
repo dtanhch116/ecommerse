@@ -1,0 +1,39 @@
+@use '@styles/mixin.scss' as *;
+
+.container {
+    padding: 30px 20px 0 20px;
+
+    .title {
+        font-size: 18px;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .boxRememberMe {
+        margin-bottom: 30px;
+        input {
+            margin-right: 10px;
+        }
+
+        span {
+            font-size: 14px;
+        }
+    }
+
+    // .boxBtnLogin {
+    //     @include flex_box_custom(center, center, 0px);
+
+    //     width: 100%;
+    // }
+
+    .lostPws {
+        font-size: 20px;
+        text-align: center;
+        margin-top: 20px;
+
+        &:hover {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    }
+}
