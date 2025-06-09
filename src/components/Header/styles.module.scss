@@ -3,11 +3,27 @@
 @use '@styles/variable.scss' as *;
 
 .container {
-    position: absolute;
-    top: 0;
     right: 0;
     left: 0;
     @include flex_box_custom(center, center, 0px);
+}
+
+.topHeader {
+    position: absolute;
+    top: 0;
+
+}
+
+.fixedHeader {
+    position: fixed;
+    top: -75px;
+    background-color: #FFFFFFE6;
+    box-shadow: 2px 0px 12px 0px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(5px);
+    z-index: 1;
+
+    transform: translateY(75px);
+    transition: transform 0.7s ease;
 }
 
 .containerHeader {
@@ -20,6 +36,8 @@
 
 .containerBoxIcon {
     @include flex_box_custom(center, center, 10px);
+
+    cursor: pointer;
 }
 
 .containerBox {
