@@ -9,6 +9,11 @@ import useScrollHanding from "@/hooks/useScrollHanding";
 import { useContext, useEffect, useState } from "react";
 import classNames from "classnames";
 import { SideBarContext } from "@/contexts/SideBarProvider";
+import { TfiReload } from "react-icons/tfi";
+import { CiHeart } from "react-icons/ci";
+import { PiShoppingCartThin } from "react-icons/pi";
+
+
 
 function Header() {
 
@@ -20,13 +25,19 @@ function Header() {
 
     const { scrollPosition } = useScrollHanding();
     const [ fixedPosition, setFixedPosition ] = useState(false);
+    const { setIsOpen, setType} = useContext(SideBarContext);   
+
+    const handleOpenSideBar = (type) => {
+        setIsOpen(true);
+        setType(type);
+    } 
     
     useEffect(() => {
         setFixedPosition(scrollPosition > 70);
 
     }, [scrollPosition])
 
-    const {isOpen, setIsOpen} = useContext(SideBarContext);    
+    
 
     return (
         <div className={classNames(container, topHeader,{
@@ -51,13 +62,25 @@ function Header() {
                 <div className={containerBox}>
                     <div className={containerMenu}>
                         {dataMenu.slice(3, dataMenu.length).map((item, index) => {
-                            return <Menu content={item.content} href={item.href} key={index} setIsOpen={setIsOpen}/>
+                            return <Menu content={item.content} href={item.href} key={index}/>
                         })}
                     </div>
                     <div className={containerBoxIcon}>
-                        <img width='26px' src={reload} alt="" />
-                        <img width='26px' src={heart} alt="" />
-                        <img width='26px' src={cart} alt="" />
+                        <TfiReload style={{
+                            fontSize: '20px'
+                        }}
+                        onClick={() =>handleOpenSideBar('conpare')}
+                        />
+                        <CiHeart style={{
+                            fontSize: '25px'
+                        }}
+                        onClick={() => handleOpenSideBar('wishlist')}
+                        />
+                        <PiShoppingCartThin style={{
+                            fontSize: '25px'
+                        }}
+                        onClick={() => handleOpenSideBar('cart')}
+                        />
                     </div>
                 </div>
             </div>
