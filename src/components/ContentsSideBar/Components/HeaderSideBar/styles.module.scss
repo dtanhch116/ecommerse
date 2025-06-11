@@ -1,0 +1,7 @@
+@use '@styles/mixin.scss' as *;
+
+.container {
+    @include flex_box_custom(center, center, 20px);
+
+    flex-direction: column;
+}
