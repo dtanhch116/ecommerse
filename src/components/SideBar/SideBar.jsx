@@ -5,6 +5,8 @@ import classNames from 'classnames';
 import { TfiClose } from "react-icons/tfi";
 import Login from '@components/ContentsSideBar/Login/Login';
 import Compare from '@components/ContentsSideBar/Compare/Compare';
+import WishList from '@components/ContentsSideBar/WishList/WishList';
+import Cart from '@components/ContentsSideBar/Cart/Cart';
 
 
 
@@ -23,9 +25,9 @@ function SideBar() {
             case 'conpare':
                 return <Compare />
             case 'wishlist':
-                return 'wishlist'
+                return <WishList />
             case 'cart':
-                return 'cart'
+                return <Cart />
 
             default:
                 return <Login />
