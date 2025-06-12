@@ -3,11 +3,13 @@ import styles from './styles.module.scss';
 import MyButton from "@components/Button/Button";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { ToastContext } from "@/contexts/ToastProvider";
 
 function Login() {
     const { container, title, boxRememberMe, boxBtnLogin, lostPws } = styles;
     const [isRegister, setIsRegister] = useState(false);
+    const { toast } = useContext(ToastContext);
     const handleTonggle = () => {
         setIsRegister(!isRegister);
         formik.resetForm();
@@ -58,7 +60,10 @@ function Login() {
                     </div>
                 )}
 
-                <MyButton content={isRegister ? 'Register' : 'Login'} type='submit' />
+                <MyButton content={isRegister ? 'Register' : 'Login'}
+                 type='submit' 
+                 onClick={() => toast.success('message')}
+                 />
             </form>
 
             <MyButton content={
