@@ -3,9 +3,10 @@ import styles from './styles.module.scss';
 import MyButton from "@components/Button/Button";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ToastContext } from "@/contexts/ToastProvider";
-import { register } from "@/apis/authService";
+import { register, signIn, getInfo } from "@/apis/authService";
+import Cookies from "js-cookie";
 
 function Login() {
     const { container, title, boxRememberMe, boxBtnLogin, lostPws } = styles;
@@ -30,14 +31,14 @@ function Login() {
             )
         }),
         onSubmit: async (values) => {
-            console.log(isRegister);
             
             if(isLoading) return;
-
-            if (isRegister) {
-                const { email: username, password } = values
+            const { email: username, password } = values
 
             setIsLoading(true);
+
+            if (isRegister) {
+
 
             await register({ username, password}).then((res) => {
                 toast.success(res.data.message);
@@ -47,8 +48,27 @@ function Login() {
                 setIsLoading(false);
             });
             }
+
+            if(!isRegister) {
+                
+                await signIn({username, password}).then((res) => {
+                    console.log(res);
+                    setIsLoading(false);
+                    const { id, token, refreshToken } = res.data;
+                    Cookies.set('id', id);
+                    Cookies.set('token', token);
+                    Cookies.set('refreshToken', refreshToken);
+                }).catch((err) => {
+                    console.log(err);
+                    setIsLoading(false);
+                });
+            }
         }
     })
+
+    useEffect(() => {
+        getInfo();
+    }, [])
 
     return (
         <div className={container}>
