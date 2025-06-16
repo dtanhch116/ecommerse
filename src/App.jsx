@@ -11,21 +11,21 @@ function App() {
   return (
     <ToastProvider>
       <SideBarProvider>
-      <SideBar />
-      <BrowserRouter>
-      <Suspense fallback={<div>loading...</div>}>
-        <Routes>
-          {
-            routers.map((item, index) => {
-              return (
-                <Route path={item.path} element={<item.component />} key={index} />
-              );
-            })
-          }
-        </Routes>
-      </Suspense>
-    </BrowserRouter>
-    </SideBarProvider>
+        <SideBar />
+        <BrowserRouter>
+          <Suspense fallback={<div>loading...</div>}>
+            <Routes>
+              {
+                routers.map((item, index) => {
+                  return (
+                    <Route path={item.path} element={<item.component />} key={index} />
+                  );
+                })
+              }
+            </Routes>
+          </Suspense>
+        </BrowserRouter>
+      </SideBarProvider>
     </ToastProvider>
   )
 }

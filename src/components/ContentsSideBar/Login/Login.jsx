@@ -5,11 +5,13 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useContext, useState } from "react";
 import { ToastContext } from "@/contexts/ToastProvider";
+import { register } from "@/apis/authService";
 
 function Login() {
     const { container, title, boxRememberMe, boxBtnLogin, lostPws } = styles;
     const [isRegister, setIsRegister] = useState(false);
     const { toast } = useContext(ToastContext);
+    const [ isLoading, setIsLoading ] = useState(false);
     const handleTonggle = () => {
         setIsRegister(!isRegister);
         formik.resetForm();
@@ -27,8 +29,24 @@ function Login() {
                 'Passwords must match'
             )
         }),
-        onSubmit: (value) => {
-            console.log(value);
+        onSubmit: async (values) => {
+            console.log(isRegister);
+            
+            if(isLoading) return;
+
+            if (isRegister) {
+                const { email: username, password } = values
+
+            setIsLoading(true);
+
+            await register({ username, password}).then((res) => {
+                toast.success(res.data.message);
+                setIsLoading(false);
+            }).catch((err) => {
+                toast.error(err.response.data.message)
+                setIsLoading(false);
+            });
+            }
         }
     })
 
@@ -48,7 +66,7 @@ function Login() {
                 />
 
                 {isRegister && (
-                    <InputCommons id='cfmPassword' lable={'Confirm Password'} type={'confirmPassword'} isRequired={true}
+                    <InputCommons id='cfmPassword' lable={'Confirm Password'} type={'password'} isRequired={true}
                         formik={formik}
                     />
                 )}
@@ -60,9 +78,8 @@ function Login() {
                     </div>
                 )}
 
-                <MyButton content={isRegister ? 'Register' : 'Login'}
+                <MyButton content={ isLoading ? 'Loading...' : isRegister ? 'Register' : 'Login'}
                  type='submit' 
-                 onClick={() => toast.success('message')}
                  />
             </form>
 
