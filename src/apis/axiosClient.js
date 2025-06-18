@@ -11,7 +11,6 @@ const axiosClient = axios.create({
 
 axiosClient.interceptors.request.use(async (config) => {
     const token = Cookies.get('token');
-    console.log(config);
     
 
     if(token) {
@@ -24,7 +23,7 @@ axiosClient.interceptors.request.use(async (config) => {
 })
 
 axiosClient.interceptors.response.use(async (config) => {
-    return res;
+    return config;
 }, async (err) => {
     
     const originalRequest = err.config;

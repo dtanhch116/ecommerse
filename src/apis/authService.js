@@ -10,9 +10,10 @@ const signIn = async (body) => {
     return await axiosClient.post('/login', body)
 }
 
-const getInfo = async (body) => {
-    const id = Cookies.get('id');
-    return await axiosClient.get(`/user/info/${id}`)
+const getInfo = async (userId) => {
+    console.log(userId);
+    
+    return await axiosClient.get(`/user/info/${userId}`)
 }
 
 export {

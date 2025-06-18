@@ -38,8 +38,6 @@ function Login() {
             setIsLoading(true);
 
             if (isRegister) {
-
-
             await register({ username, password}).then((res) => {
                 toast.success(res.data.message);
                 setIsLoading(false);
@@ -50,12 +48,10 @@ function Login() {
             }
 
             if(!isRegister) {
-                
                 await signIn({username, password}).then((res) => {
-                    console.log(res);
                     setIsLoading(false);
                     const { id, token, refreshToken } = res.data;
-                    Cookies.set('id', id);
+                    Cookies.set('userId', id);
                     Cookies.set('token', token);
                     Cookies.set('refreshToken', refreshToken);
                 }).catch((err) => {
@@ -65,10 +61,6 @@ function Login() {
             }
         }
     })
-
-    useEffect(() => {
-        getInfo();
-    }, [])
 
     return (
         <div className={container}>
