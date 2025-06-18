@@ -5,11 +5,13 @@ import { Suspense } from 'react';
 import { SideBarProvider } from '@/contexts/SideBarProvider';
 import SideBar from '@components/SideBar/SideBar';
 import { ToastProvider } from '@/contexts/ToastProvider';
+import { StoreProvider } from '@/contexts/StoreProvider';
 
 function App() {
 
   return (
-    <ToastProvider>
+    <StoreProvider>
+      <ToastProvider>
       <SideBarProvider>
         <SideBar />
         <BrowserRouter>
@@ -27,6 +29,8 @@ function App() {
         </BrowserRouter>
       </SideBarProvider>
     </ToastProvider>
+    </StoreProvider>
+    
   )
 }
 
